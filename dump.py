@@ -9,7 +9,8 @@ import glob
 def main(args) :
 
     img_dir = args.in_dir
-    img_dir = os.path.abspath(img_dir)
+    if args.absolute :
+        img_dir = os.path.abspath(img_dir)
     if not os.path.isdir(img_dir) :
         print('ERROR provided file directory (={}) is not found!'.format(img_dir))
         sys.exit()
@@ -66,6 +67,9 @@ if __name__ == '__main__' :
     )
     parser.add_argument('-t', '--title', default = '',
         help = 'Provide a header title for the plots'
+    )
+    parser.add_argument('--absolute', default = False, action = 'store_true',
+        help = 'Use absolute (full) paths for image sources'
     )
     args = parser.parse_args()
 
